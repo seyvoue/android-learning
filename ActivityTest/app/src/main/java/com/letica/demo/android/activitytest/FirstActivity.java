@@ -11,12 +11,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class FirstActivity extends AppCompatActivity {
+public class FirstActivity extends BaseActivity {
     private static final String TAG = "FirstActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "Task id is " + getTaskId()); // 打印当前返回栈的id
         setContentView(R.layout.first_layout);
         Button button1 = (Button) findViewById(R.id.button_1);
         button1.setOnClickListener(new View.OnClickListener() {
@@ -40,10 +41,16 @@ public class FirstActivity extends AppCompatActivity {
 //                Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
 //                intent.putExtra("extra_data",data);
                 /* 返回数据给上一个活动 */
-                Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
-                startActivityForResult(intent, 1);
+//                Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
+//                startActivityForResult(intent, 1);
 
-                startActivity(intent);
+                /* 理解 standard 启动模式 */
+//                Intent intent = new Intent(FirstActivity.this, FirstActivity.class);
+                /* 理解 singleTop 启动模式 */
+//                Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
+//                startActivity(intent);
+                /* 启动下一个活动的最佳写法 */
+                SecondActivity.actionStart(FirstActivity.this,"data1", "data2");
             }
         });
     }
@@ -77,5 +84,11 @@ public class FirstActivity extends AppCompatActivity {
                     Log.d(TAG,returnedData);
                 }
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(TAG, "onRestart");
     }
 }

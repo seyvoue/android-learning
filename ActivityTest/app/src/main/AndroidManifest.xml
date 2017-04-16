@@ -10,6 +10,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".FirstActivity"
+            android:launchMode="singleTask"
             android:label="This is the FirstActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +20,7 @@
         </activity>
         <activity
             android:name=".SecondActivity"
+            android:launchMode="singleInstance"
             android:label="This is the SecondActivity">
             <intent-filter>
                 <action android:name="com.letica.demo.android.activitytest.ACTION_START" />
